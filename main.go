@@ -1,7 +1,7 @@
 /*
 @autor: Jorge Pérez Rodríguez
-@fecha: 20/11/2024
-@descripcion: Se añadió funcionalidad de registro, consulta, actualización y eliminación de productos mediante un menú interactivo, con validación de entradas y mensajes de confirmación para acciones realizadas..
+@fecha: 05/12/2024
+@descripcion: registro y listado de productos con menú interactivo, métodos encapsulados y manejo de errores.
 */
 
 package main
@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-// estructura producto: representa un producto del inventario
+// estructura producto: representa un producto del inventario (componente principal)
 type Producto struct {
 	ID          int
 	Nombre      string
@@ -33,7 +33,7 @@ func (prod *Producto) ActualizarStock(cantidad int) {
 	fmt.Printf("stock actualizado a %d unidades.\n", prod.Stock)
 }
 
-// estructura para gestionar el inventario de productos
+// estructura para gestionar el inventario de productos (componente principal)
 type Inventario struct {
 	Productos []Producto
 }
