@@ -1,0 +1,38 @@
+<h2>Historial de Transacciones</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Usuario</th>
+        <th>Tipo</th>
+        <th>Cantidad</th>
+        <th>Fecha</th>
+    </tr>
+    </thead>
+    <tbody id="historialBody"></tbody>
+</table>
+
+<script>
+    async function cargarHistorial() {
+        const response = await fetch('/api/historial');
+        const data = await response.json();
+        const tbody = document.getElementById('historialBody');
+        tbody.innerHTML = '';
+
+        data.forEach(item => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.producto}</td>
+                    <td>${item.usuario}</td>
+                    <td>${item.tipo}</td>
+                    <td>${item.cantidad}</td>
+                    <td>${item.fecha}</td>
+                </tr>
+            `;
+        });
+    }
+
+    window.onload = cargarHistorial;
+</script>

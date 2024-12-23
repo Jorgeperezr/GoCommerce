@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Login - GoCommerce</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - GoCommerce</title>
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
-<h1>Iniciar Sesión</h1>
-<form action="/login" method="POST">
-    Usuario: <input type="text" name="usuario"><br>
-    Contraseña: <input type="password" name="contraseña"><br>
-    <button type="submit">Ingresar</button>
-</form>
+<div class="login-container">
+    <h1>Iniciar Sesión</h1>
+    <form id="loginForm">
+        <input type="text" id="usuario" placeholder="Usuario" required>
+        <input type="password" id="contrasena" placeholder="Contraseña" required>
+        <button type="submit">Acceder</button>
+    </form>
+    <p id="error" class="error"></p>
+</div>
+<footer>
+    © 2024 GoCommerce. Todos los derechos reservados.
+</footer>
+<script src="./js/auth.js"></script>
 </body>
 </html>

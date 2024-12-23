@@ -1,34 +1,14 @@
 package controllers
 
 import (
-	"GoCommerce/models"
-	"GoCommerce/utils"
 	"fmt"
+	"net/http"
 )
 
-func IniciarAplicacion() {
-	fmt.Println("Bienvenido a GoCommerce")
-	inventario := models.NuevoInventario()
-
-	for {
-		fmt.Println("\n1. Registrar Producto")
-		fmt.Println("2. Buscar Producto")
-		fmt.Println("3. Listar Productos")
-		fmt.Println("4. Salir")
-		opcion := utils.LeerEntrada("Seleccione una opción: ")
-
-		switch opcion {
-		case "1":
-			utils.RegistrarProducto(inventario)
-		case "2":
-			utils.BuscarProducto(inventario)
-		case "3":
-			utils.ListarProductos(inventario)
-		case "4":
-			fmt.Println("Saliendo...")
-			return
-		default:
-			fmt.Println("Opción no válida, intente nuevamente.")
-		}
-	}
+// Menu muestra las opciones principales del sistema
+func Menu(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "Bienvenido al sistema GoCommerce")
+	fmt.Fprintln(w, "1. Gestión de Productos")
+	fmt.Fprintln(w, "2. Historial de Transacciones")
+	fmt.Fprintln(w, "3. Cerrar Sesión")
 }
