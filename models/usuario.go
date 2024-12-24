@@ -1,9 +1,11 @@
+// Package models contains the data models for the GoCommerce application.
 package models
 
-// Usuario representa la estructura de un usuario en la base de datos
+// Usuario representa un usuario en el sistema
 type Usuario struct {
-	ID     int
-	Nombre string
-	Correo string
-	Rol    string
+	ID       int    `json:"id"`
+	Nombre   string `json:"nombre"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	Rol      string `json:"rol"`
 }

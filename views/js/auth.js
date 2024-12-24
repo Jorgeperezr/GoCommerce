@@ -1,25 +1,18 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    const usuario = document.getElementById('usuario').value;
-    const contrasena = document.getElementById('contrasena').value;
-    const error = document.getElementById('error');
+    const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
 
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ usuario, contrasena }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Credenciales incorrectas');
-        }
-
+    if (res.ok) {
+        alert('Inicio de sesión exitoso');
         window.location.href = '/dashboard.html';
-    } catch (err) {
-        error.textContent = err.message;
+    } else {
+        alert('Credenciales incorrectas');
     }
 });

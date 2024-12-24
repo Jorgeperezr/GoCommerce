@@ -1,25 +1,29 @@
 package main
 
 import (
-	"GoCommerce/api"
-	"GoCommerce/database"
 	"log"
 	"net/http"
+
+	"github.com/jorge/GoCommerce/database"
+	"github.com/jorge/GoCommerce/routes"
 )
 
 func main() {
 	// Conectar a la base de datos
 	if err := database.ConectarDB(); err != nil {
-		log.Fatalf("Error al conectar a la base de datos: %v", err)
+		log.Fatal("no se pudo conectar a la base de datos:", err)
 	}
 	defer database.CerrarDB()
 
+	// Aplicar migraciones
+	if err := database.MigrarDB(); err != nil {
+		log.Fatal("no se pudieron aplicar las migraciones:", err)
+	}
+
 	// Configurar rutas
-	api.ConfigurarRutas()
+	routes.ConfigurarRutas()
 
 	// Iniciar servidor
-	log.Println("Servidor iniciado en http://localhost:8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatalf("Error al iniciar servidor: %v", err)
-	}
+	log.Println("servidor iniciado en http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

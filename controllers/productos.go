@@ -2,33 +2,41 @@ package controllers
 
 import (
 	"GoCommerce/database"
+	"GoCommerce/models"
 	"encoding/json"
 	"net/http"
-	"strconv"
 )
 
-// ObtenerProductos maneja la solicitud de obtener productos
+// ObtenerProductos devuelve todos los productos.
 func ObtenerProductos(w http.ResponseWriter, r *http.Request) {
-	productos, err := database.ObtenerProductos()
+	rows, err := database.DB.Query("SELECT id, nombre, precio, stock, categoria FROM productos")
 	if err != nil {
 		http.Error(w, "Error al obtener productos", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(productos)
+	defer rows.Close()
+
+	var productos []models.Producto
+	for rows.Next() {
+		var p models.Producto
+		if err := rows.Scan(&p.ID, &p.Nombre, &p.Precio, &p.Stock, &p.Categoria); err != nil {
+			http.Error(w, "Error al escanear producto", http.StatusInternalServerError)
+			return
+		}
+		productos = append(productos, p)
+	}
+
+	if err := rows.Err(); err != nil {
+		http.Error(w, "Error al iterar sobre los productos", http.StatusInternalServerError)
+		return
+	}
+
+	if err := json.NewEncoder(w).Encode(productos); err != nil {
+		http.Error(w, "Error al codificar productos a JSON", http.StatusInternalServerError)
+		return
+	}
 }
 
-// EliminarProducto maneja la solicitud de eliminar un producto
-func EliminarProducto(w http.ResponseWriter, r *http.Request) {
-	idStr := r.URL.Query().Get("id")
-	id, err := strconv.Atoi(idStr)
-	if err != nil {
-		http.Error(w, "ID inválido", http.StatusBadRequest)
-		return
-	}
-	if err := database.EliminarProducto(id); err != nil {
-		http.Error(w, "Error al eliminar producto", http.StatusInternalServerError)
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Producto eliminado correctamente"))
+func ObtenerProductosHandler(w http.ResponseWriter, r *http.Request) {
+	// Your product retrieval logic here
 }
