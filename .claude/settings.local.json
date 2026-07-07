@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -o -q \"/Users/jorge/Downloads/GoCommerce-main.zip\" -d gocommerce)",
+      "Bash(go version *)",
+      "Bash(go build *)",
+      "Read(//usr/local/go/bin/**)",
+      "Read(//Users/jorge/**)",
+      "Bash(curl -sSL -o go.tar.gz https://go.dev/dl/go1.22.12.darwin-arm64.tar.gz)",
+      "Bash(tar -xzf go.tar.gz)",
+      "Bash(./go/bin/go version *)",
+      "Bash(rm -rf go go.tar.gz)",
+      "Bash(curl -sSL -o go.tar.gz https://go.dev/dl/go1.22.12.darwin-amd64.tar.gz)",
+      "Bash(curl -s -X POST localhost:18080/auth/auth/register -H 'Content-Type: application/json' -d '{\"username\":\"demo1\",\"password\":\"Password1\"}')",
+      "Bash(curl -s -w \"\\\\nHTTP %{http_code}\\\\n\" -X POST localhost:18080/auth/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"demo1\",\"password\":\"Password1\"}')"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "GoCommerce",
+  "image": "mcr.microsoft.com/devcontainers/go:1.22",
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "GoCommerce", "onAutoForward": "openPreview" }
+  },
+  "postCreateCommand": "cd backend && go mod download",
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.go"]
+    }
+  }
+}

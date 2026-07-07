@@ -1,0 +1,19 @@
+# Binarios y artefactos de compilación
+backend/GoCommerce
+backend/gocommerce
+*.exe
+
+# Bases de datos locales
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# Secretos
+.env
+
+# Sistema operativo / IDE
+.DS_Store
+.idea/
+.vscode/
